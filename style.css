@@ -1,0 +1,65 @@
+body {
+  font-family: 'Barlow', sans-serif;
+  background: #1a1a1a;
+  margin: 20px;
+}
+
+h1 {
+  font-family: 'Climate Crisis', sans-serif;
+  color: #12c92a;
+  text-align: center;
+}
+li {
+  color: white;
+}
+button {
+  background-color: #12c92a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-right: 10px;
+}
+
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-right: 10px;
+}
+
+h3 {
+  color: white;
+}
+
+div.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.team-card {
+  background-color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 2px solid #12c92a;
+}
+
+.strong { color: #12c92a; }
+.medium { color: #f0c040; }
+.weak { color: #e74c3c; }
+
+.remove-btn {
+  background-color: #e74c3c;
+  padding: 2px 7px;
+  font-size: 0.8rem;
+  margin-left: 10px;
+}

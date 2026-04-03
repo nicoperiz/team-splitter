@@ -1,17 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Barlow', sans-serif;
   background: #1a1a1a;
-  margin: 20px;
+  color: white;
+  padding: 30px 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 h1 {
   font-family: 'Climate Crisis', sans-serif;
   color: #12c92a;
   text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
 }
-li {
-  color: white;
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
 }
+
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  flex: 1;
+}
+
 button {
   background-color: #12c92a;
   color: white;
@@ -19,38 +43,57 @@ button {
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-input {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-right: 10px;
+button:hover {
+  opacity: 0.85;
 }
 
-select {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-right: 10px;
+#player-list {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
 }
 
-h3 {
+#player-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+}
+
+#reset-btn {
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#reset-btn:hover {
+  background-color: #e74c3c;
   color: white;
 }
 
-div.controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-}
 .team-card {
-  background-color: #333;
-  padding: 15px;
+  background-color: #2a2a2a;
+  padding: 15px 20px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: 2px solid #12c92a;
+}
+
+.team-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+h3 {
+  color: #12c92a;
 }
 
 .strong { color: #12c92a; }
@@ -61,5 +104,12 @@ div.controls {
   background-color: #e74c3c;
   padding: 2px 7px;
   font-size: 0.8rem;
-  margin-left: 10px;
+  border-radius: 4px;
+}
+
+#error-msg {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  min-height: 20px;
 }

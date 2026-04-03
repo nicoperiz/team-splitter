@@ -8,8 +8,11 @@ let players = [];
 function addPlayer() {
   const name = playerName.value;
   if (name === "") return;
-  const exists = players.find(p => p.name === name);
-  if (exists) return;
+  const exists = players.find(p => p.name.toLowerCase() === name.toLowerCase());
+  if (exists) {
+  showError("Player already exists!");
+  return;
+}
   const level = playerLevel.value;
   const player = { name: name, level: level };
   players.push(player);
@@ -28,15 +31,16 @@ function renderPlayers() {
 function splitTeams() {
     const numTeams = parseInt(numberOfTeams.value);
   if (players.length === 0) {
-  alert("Add at least one player!");
+  showError("Add at least one player!");
   return;
 }
 if (numTeams > players.length) {
-  alert("Too many teams! Add more players.");
+  showError("Too many teams! Add more players.");
   return;
 }
   const order = { strong: 1, medium: 2, weak: 3 };
-  const sorted = players.sort((a, b) => order[a.level] - order[b.level]);
+  const shuffled = shuffle([...players]);
+  const sorted = shuffled.sort((a, b) => order[a.level] - order[b.level]);
   const teams = Array.from({ length: numTeams }, () => []);
   sorted.forEach((player, i) => {
     teams[i % numTeams].push(player);
@@ -83,3 +87,17 @@ playerName.addEventListener("keydown", (e) => {
 numberOfTeams.addEventListener("keydown", (e) => {
   if (e.key === "Enter") splitTeams();
 });
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function showError(msg) {
+  const error = document.getElementById("error-msg");
+  error.textContent = msg;
+  setTimeout(() => error.textContent = "", 2000);
+}

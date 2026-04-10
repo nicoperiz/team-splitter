@@ -52,15 +52,23 @@ function splitTeams() {
   const sorted = shuffle([...players]).sort((a, b) => order[a.level] - order[b.level]);
   const teams = Array.from({ length: numTeams }, () => []);
 
-  sorted.forEach((player, i) => teams[i % numTeams].push(player));
+  let direction = 1;
+  let teamIndex = 0;
 
-  const maxScore = Math.max(...teams.map(t => t.reduce((sum, p) => sum + levelScore[p.level], 0)));
+  sorted.forEach((player) => {
+    teams[teamIndex].push(player);
+    teamIndex += direction;
+    if (teamIndex >= numTeams) { direction = -1; teamIndex = numTeams - 1; }
+    else if (teamIndex < 0) { direction = 1; teamIndex = 0; }
+  });
+
+  const shuffledTeams = shuffle(teams);
+  const maxScore = Math.max(...shuffledTeams.map(t => t.reduce((sum, p) => sum + levelScore[p.level], 0)));
 
   teamsContainer.innerHTML = "";
-  teams.forEach((team, i) => {
+  shuffledTeams.forEach((team, i) => {
     const score = team.reduce((sum, p) => sum + levelScore[p.level], 0);
-    const maxPossible = team.length * 3;
-    const fillPercent = Math.round((score / maxPossible) * 100);
+    const fillPercent = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
 
     const teamDiv = document.createElement("div");
     teamDiv.className = "team-card";
@@ -71,7 +79,7 @@ function splitTeams() {
           <div class="team-meta">${team.length} player${team.length !== 1 ? "s" : ""}</div>
         </div>
         <div>
-          <div class="team-score-label">Strength ${score}/${maxPossible}</div>
+          <div class="team-score-label">Strength ${score}</div>
           <div class="score-bar">
             <div class="score-fill" style="width: ${fillPercent}%"></div>
           </div>
